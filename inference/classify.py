@@ -15,7 +15,7 @@ dataset = ImageFolder("data/Classification", transform=transform)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model = models.resnet18(pretrained=False)
-model.fc = torch.nn.Linear(model.fc.in_features, 3)
+model.fc = torch.nn.Linear(model.fc.in_features, 4)
 model.load_state_dict(torch.load("classifier.pth", map_location=device))
 model = model.to(device)
 model.eval()

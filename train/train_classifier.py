@@ -25,7 +25,7 @@ loader = DataLoader(dataset, batch_size=8, shuffle=True)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 model = models.resnet50(pretrained=True)
-model.fc = nn.Linear(model.fc.in_features, 3)
+model.fc = nn.Linear(model.fc.in_features, 4)
 model = model.to(device)
 
 criterion = nn.CrossEntropyLoss()
