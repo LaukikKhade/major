@@ -56,18 +56,17 @@ transform_loc = transforms.Compose([
 # ---------------- MODEL 1: Tampering Classifier (ResNet50) ----------------
 cls_model = models.resnet50(pretrained=False)
 cls_model.fc = torch.nn.Linear(cls_model.fc.in_features, 4)
-cls_model.load_state_dict(torch.load("forenx_resnet50_best.pth", map_location=device))
+cls_model.load_state_dict(torch.load("classifier_v2.pth", map_location=device))
 cls_model = cls_model.to(device)
 cls_model.eval()
 
 # ---------------- MODEL 2: Tampering Localizer (UNet) ----------------
 loc_model = UNet().to(device)
-loc_model.load_state_dict(torch.load("unet (1).pth", map_location=device))
+loc_model.load_state_dict(torch.load("unet.pth", map_location=device))
 loc_model.eval()
 
 # ---------------- MODEL 3: Source Camera Identifier (EfficientNet-B0) ----------------
-# Assuming your camera weights file is named 'classifier (1).pth' or 'camera_classifier.pth'
-camera_model_path = "SCI_efficent_net.pth" 
+camera_model_path = "camera_classifier.pth" 
 
 camera_model = models.efficientnet_b0(pretrained=False)
 in_features = camera_model.classifier[1].in_features
